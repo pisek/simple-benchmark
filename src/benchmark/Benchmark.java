@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 public abstract class Benchmark {
 	
-	protected static StandardBenchmark staticBanchmark = null;
+	protected static StandardBenchmark staticBenchmark = null;
 	
 	private boolean started = false;
 	private Long startTime = 0L;
@@ -77,4 +77,43 @@ public abstract class Benchmark {
 	public boolean isStarted() {
 	    return started;
     }
+	
+	
+	/**
+	 * Metoda statyczna odpala pojedynczy benchmark.
+	 * 
+	 * @author mpisarsk
+	 *
+	 */
+	public static void startBenchmark() {
+		if (staticBenchmark == null) {
+			staticBenchmark = new StandardBenchmark();
+		} else if (staticBenchmark.isStarted()) {
+			staticBenchmark.stop();
+		}
+		
+		staticBenchmark.start();
+	}
+	
+	/**
+	 * Metoda statyczna, zatrzymuje testowanie. Najlepiej uzywac jej w sekcji {@code finally} jako ze metoda ta musi być wykonana na koniec testowania.<br/>
+	 * Zwraca liczbe nanosekund ktore zajelo wykonywanie danego kodu.
+	 * 
+	 * @author mpisarsk
+	 * 
+	 * @return nanosekundy
+	 */
+	public static Long stopBenchmark() {
+		if (staticBenchmark == null) {
+			System.err.println("No benchmark initialised");
+			return 0L;
+		} else if (!staticBenchmark.isStarted()) {
+			System.err.println("No benchmark started");
+			return 0L;
+		}
+		
+		return staticBenchmark.stop();
+	}
+	
+	
 }

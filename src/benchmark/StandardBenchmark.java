@@ -62,45 +62,4 @@ public class StandardBenchmark extends Benchmark {
 		return br;
 	}
 
-	
-	
-	
-	
-	
-	/**
-	 * Metoda statyczna odpala pojedynczy benchmark.
-	 * 
-	 * @author mpisarsk
-	 *
-	 */
-	public static synchronized void startBenchmark() {
-		if (staticBanchmark == null) {
-			staticBanchmark = new StandardBenchmark();
-		} else if (staticBanchmark.isStarted()) {
-			staticBanchmark.stop();
-		}
-		
-		staticBanchmark.start();
-	}
-	
-	/**
-	 * Metoda statyczna, zatrzymuje testowanie. Najlepiej uzywac jej w sekcji {@code finally} jako ze metoda ta musi być wykonana na koniec testowania.<br/>
-	 * Zwraca liczbe nanosekund ktore zajelo wykonywanie danego kodu.
-	 * 
-	 * @author mpisarsk
-	 * 
-	 * @return nanosekundy
-	 */
-	public static synchronized Long stopBenchmark() {
-		if (staticBanchmark == null) {
-			System.err.println("No benchmark initialised");
-			return 0L;
-		} else if (!staticBanchmark.isStarted()) {
-			System.err.println("No benchmark started");
-			return 0L;
-		}
-		
-		return staticBanchmark.stop();
-	}
-
 }
