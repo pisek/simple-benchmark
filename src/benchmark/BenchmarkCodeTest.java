@@ -15,5 +15,5 @@ public interface BenchmarkCodeTest {
 	 * 
 	 * @author mpisarsk
 	 */
-	public void testCode();
+	public void testCode() throws Exception;
 }
