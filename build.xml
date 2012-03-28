@@ -1,0 +1,16 @@
+<project default="benchmark">
+	<target name="compile">
+		<javac srcdir="src" destdir="bin" />
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="lib/benchmark.jar" basedir="bin" includes="benchmark/**/*.class" />
+	</target>
+
+	<target name="benchmark" depends="compile,jar" />
+
+	<target name="clean">
+		<delete dir="bin"/>
+		<delete file="lib/benchmark.jar"/>
+	</target>
+</project>
